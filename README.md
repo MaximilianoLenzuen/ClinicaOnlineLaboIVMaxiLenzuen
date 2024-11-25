@@ -99,3 +99,33 @@ La Clínica Online dispone de seis consultorios, dos laboratorios físicos y una
 
     <img src="https://firebasestorage.googleapis.com/v0/b/clinicaonlinelaboiv-f6b94.firebasestorage.app/o/readme%2Fhistorial.jpg?alt=media&token=8faea2ad-4dfd-48de-a8a6-a0777512e9ca" alt="Logo de la Clínica Online"  height="200">
 
+
+### Sprint 4
+
+#### Gráficos y Estadísticas (Administrador)
+
+- **Log de Ingresos:** Registro de acceso al sistema por usuario, día y horario.
+- **Cantidad de Turnos por Especialidad.**
+- **Cantidad de Turnos por Día.**
+- **Cantidad de Turnos Solicitados por Médico en un Lapso de Tiempo.**
+- **Cantidad de Turnos Finalizados por Médico en un Lapso de Tiempo.**
+- 
+<img src="https://firebasestorage.googleapis.com/v0/b/clinicaonlinelaboiv-f6b94.firebasestorage.app/o/readme%2FadminGraficos.jpg?alt=media&token=dbbc1321-f771-4390-ba75-f96f6feff728" alt="Logo de la Clínica Online"  height="200">
+
+- **Correcciones extras.** Filtrar por especialidad para los pacientes
+<img src="https://firebasestorage.googleapis.com/v0/b/clinicaonlinelaboiv-f6b94.firebasestorage.app/o/readme%2FmiPerfilUsuarioEspecialidad.jpg?alt=media&token=862300e6-d7a8-4aa3-82d2-da9fb37148bb" alt="Logo de la Clínica Online"  height="200">
+
+#### Descargas de Informes
+
+- Exportación de gráficos e informes en Excel o PDF.
+
+  #### Pipes y Directivas
+- **Pipes:**
+- fechaFormateada -> Seleccionar fecha del turno
+- graficoParaExcel -> Formatea los valores de los gráficos ( turnos ) para el formato de pdf/excel
+- diaHorarioPipe -> Formatea la fecha de los logs de cada usuario
+- **Directivas:**
+- Al cerrar sesión.
+- Copiar al clipboard el nombre del dashboard (hover)
+- Zoom a la imagen de perfil
+
