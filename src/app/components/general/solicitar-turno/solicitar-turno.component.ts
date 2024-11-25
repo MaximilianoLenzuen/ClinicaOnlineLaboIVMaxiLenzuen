@@ -193,7 +193,7 @@ export class SolicitarTurnoComponent {
     { id: 6, nombre: 'Neurología', imagen: 'img/neurologia.png' },
     { id: 7, nombre: 'Odontología', imagen: '' },
     { id: 8, nombre: 'Oftalmología', imagen: 'img/oftalmologia.png' },
-    { id: 9, nombre: 'Programador', imagen: 'img/sinFoto.png' }
+    { id: 9, nombre: 'Otra', imagen: 'img/sinFoto.png' }
   ];
 
 
@@ -323,23 +323,6 @@ export class SolicitarTurnoComponent {
       this.firestoreSvc.getDocument("users", this.especialistaSeleccionado).subscribe(especialista => {
         if (especialista) {
 
-
-          /*
-          this.especialidad = especialista.especialidad.find((especialidad: any) => especialidad["nombre"] === this.especialidadSeleccionada);
-          if (this.especialidad) {
-            let dias = new Set<string>();
-            this.especialidad.horarios.forEach((horario: any) => {
-              dias.add(horario.dia);
-            });
-            
-            this.fechasDisponibles = this.obtenerFechasProximas(Array.from(dias));
-            
-            
-            
-          } else {
-            this.fechasDisponibles = [];
-          }
-          */
           this.especialidad = especialista.especialidad.find((especialidad: any) => especialidad["nombre"] === this.especialidadSeleccionada);
           if (this.especialidad) {
             let dias = new Set<string>();
@@ -384,39 +367,31 @@ export class SolicitarTurnoComponent {
  
 
 
-  onEspecialistaChange($event:any): void {
-    /*
+  onEspecialistaChange($event: any): void {
     this.fechasDisponibles = [];
     this.especialistaSeleccionado = $event;
-    var auxespecialidad:any = this.especialidadSeleccionada;
-    this.firestoreSvc.getDocument("users", this.especialistaSeleccionado).subscribe(especialista => {
-      debugger;
-      if (especialista) {
-        this.especialidadesDelEspecialista = especialista.especialidad;
-      }
-      if (especialista) {
-        this.especialidadesMapeadas = this.especialidades.filter(esp => 
-          especialista.especialidad.some((espDB: { nombre: any; }) => espDB.nombre === esp.nombre)
-        );
-      }
-        
-    })
-    this.paso = "Selecciona una especialidad";
-    */
-    this.fechasDisponibles = [];
-    this.especialistaSeleccionado = $event;
-    var auxespecialidad: any = this.especialidadSeleccionada;
     
     this.firestoreSvc.getDocument("users", this.especialistaSeleccionado).subscribe(especialista => {
       if (especialista) {
         this.especialidadesDelEspecialista = especialista.especialidad;
   
-        // Mapear especialidades del especialista con las del array
-        this.especialidadesMapeadas = this.especialidades.filter(esp => 
-          especialista.especialidad.some((espDB: { nombre: any; }) => espDB.nombre === esp.nombre)
-        );
+        // Map specialties, preserving original names
+        this.especialidadesMapeadas = especialista.especialidad.map((espDB: { nombre: string }) => {
+          // Try to find a match in predefined specialties
+          const matchedEspecialidad = this.especialidades.find(esp => esp.nombre === espDB.nombre);
+          
+          // If found, return the matched specialty
+          if (matchedEspecialidad) return matchedEspecialidad;
+          
+          // If not found, create a new object with original name and "Otra" image
+          return {
+            id: 9,
+            nombre: espDB.nombre,
+            imagen: 'img/sinFoto.png'
+          };
+        });
   
-        // Si no se encuentra ninguna especialidad, usar la opción "Otra"
+        // Fallback to "Otra" if no specialties found
         if (this.especialidadesMapeadas.length === 0) {
           this.especialidadesMapeadas = [{
             id: 9,
@@ -425,7 +400,7 @@ export class SolicitarTurnoComponent {
           }];
         }
       } else {
-        // Si el especialista no existe, usar directamente la opción "Otra"
+        // If specialist doesn't exist, use "Otra"
         this.especialidadesMapeadas = [{
           id: 9,
           nombre: 'Otra',

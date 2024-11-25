@@ -6,13 +6,13 @@ import { ExcelDownloadGenericService } from '../../../services/excel-download.se
 import { TransformarIDaStringPipe } from '../../../pipes/transformar-ida-string.pipe';
 import { DiaHorarioPipePipe } from '../../../pipes/dia-horario-pipe.pipe';
 import { GraficoToStringPipe } from '../../../pipes/grafico-to-string.pipe';
-import { MoveSVGDirective } from '../../../directives/move-svg.directive';
 import { CopyToClipboardDirective } from '../../../directives/copy-to-clipboard.directive';
+import { ZoomOnHoverDirective } from '../../../directives/app-zoom-on-hover.directive';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NgxChartsModule, MoveSVGDirective, CopyToClipboardDirective],
+  imports: [NgxChartsModule, CopyToClipboardDirective, ZoomOnHoverDirective],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   providers: [DiaHorarioPipePipe, TransformarIDaStringPipe, GraficoToStringPipe]

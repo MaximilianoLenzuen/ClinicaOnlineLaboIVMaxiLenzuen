@@ -42,17 +42,14 @@
                     <div *ngFor="let especialidad of especialidadesMapeadas" class="especialidad-btn" (click)="onEspecialidadChange(especialidad.nombre)">
                         <div>{{especialidad.nombre}}</div>
                         @if (especialidad.imagen) {
-                            @if (especialidad.imagen === "otra") {
-                                <i class='bx bx-question-mark'></i>
-                            } @else {
-                                <img [src]="especialidad.imagen" alt="{{especialidad.nombre}}">
-                            }
+                            <img [src]="especialidad.imagen" alt="{{especialidad.nombre}}">
                         } @else {
                             <i class='bx bx-image-alt'></i>
                         }
                     </div>
                 </div>
             }
+            
             @case ("Seleccione un especialista") {
                 <div class="especialidades-grid" [@especialistasAnimation]="especialistas.length">
                     <div *ngFor="let especialidad of especialistas" class="especialista-btn" (click)="onEspecialistaChange(especialidad.id); this.especialistaAux=especialidad.nombre+ ' ' + especialidad.apellido">

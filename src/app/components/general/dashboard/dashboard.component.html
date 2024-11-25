@@ -6,7 +6,7 @@
             <h1 appCopyToClipboard>{{user.nombre}} {{user.apellido}}</h1>
         </div>
         <div class="col-lg-6 right">
-            <img [src]="user.img" alt="Perfil" (click)="handleClick($event, 'perfil')">
+            <img [src]="user.img" appZoomOnHover alt="Perfil" (click)="handleClick($event, 'perfil')">
         </div>
     </div>
 
