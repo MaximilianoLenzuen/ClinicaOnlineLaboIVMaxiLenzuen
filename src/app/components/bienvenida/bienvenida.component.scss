@@ -1,0 +1,83 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    width: 100%;
+    background-size: cover;
+}
+
+.logo-img {
+    width: 70px;
+}
+
+.box-principal {
+    position: relative;
+    width: 95%;
+    height: fit-content;
+    border-radius: 40px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(15, 15, 15, 0.1);
+    transition: height 0.3s ease; /* Opcional: para una transición suave de altura */
+    color: #3C3E46;
+    padding: 20px 20px;
+}
+
+.container-fluid {
+    text-align: center;
+    color: #272e41;
+    padding: 30px 0px;
+
+    h5 {
+        margin-top: 10px;
+        font-weight: 700;
+    }
+
+
+    h1 {
+        margin-top: 30px;
+        font-size: 4em;
+        margin-bottom: 150px;
+    }
+}
+
+.form-container {
+    border-radius: 40px;
+    background-color: #f3f8fa;
+}
+
+.btnSeleccion {
+    width: 200px; /* Tamaño más grande */
+    height: 200px; /* Tamaño más grande */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Forma circular */
+    border: none;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    font-size: 30px;
+    padding: 0; /* Sin padding extra */
+    margin: 20px; /* Espacio entre los botones */
+    text-align: center;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(28, 228, 199, 0.5), 0 6px 20px 0 rgba(36, 208, 232, 0.5);
+}
+
+.btnSeleccion:active {
+    transform: scale(0.95);
+}
+
+.btnSeleccion i {
+    font-size: 100px; /* Tamaño del ícono ajustado */
+}
+
+.btnPaciente {
+    background: linear-gradient(to right, #1ce4c7, #24d0e8);
+    margin-bottom: 50px;
+}
+
+

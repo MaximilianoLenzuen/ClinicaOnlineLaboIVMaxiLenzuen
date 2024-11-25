@@ -1,0 +1,86 @@
+<h2>Mi Perfil</h2>
+
+<div *ngIf="usuario" style="padding-left: 30px; padding-right: 30px;">
+  <div class="container container-perfil">
+    <div class="row">
+      <div class="col-lg-6" style="display: flex; flex-direction: row;">
+        <img [src]="usuario.img" alt="Perfil">
+        @if (usuario.img2) {
+          <img [src]="usuario.img2" alt="Perfil">
+        }
+      </div>
+      <div class="col-lg-6">
+        <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+        <p><strong>Apellido:</strong> {{ usuario.apellido }}</p>
+        <p><strong>DNI:</strong> {{ usuario.dni }}</p>
+        <p><strong>Edad:</strong> {{ usuario.edad }}</p>
+        <p><strong>Email:</strong> {{ usuario.email }}</p>
+        @if (usuario.obraSocial) {
+          <p><strong>Obra social:</strong> {{ usuario.obraSocial }}</p>
+        }
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+
+  @if (usuario.userType === "paciente") {
+    <app-listar-historial-clinico [usuarioID]="this.usuario.id"></app-listar-historial-clinico>
+  }
+  
+  @if (usuario.userType === "especialista") {
+    <h3>Mis Horarios</h3>
+
+    <div class="inputBox">
+      <label for="fecha">Especialidad:</label>
+      <select name="especialidad" ngModel required (change)="onEspecialidadElegida($event)">
+          <option value="" disabled selected style="color: #838383;">Selecciona la especialidad</option>
+          <option *ngFor="let especialidad of especialidades; index as i" [value]="i">{{ especialidad.nombre }}</option>
+      </select> 
+      <i></i>
+    </div>
+
+    @if (especialidadElegida != -1) {
+      <div class="tabla-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Día</th>
+              <th>Hora Inicio</th>
+              <th>Hora Fin</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let horario of horarios; let i = index;">
+              <td>
+                <select [(ngModel)]="horario.dia" class="form-control">
+                  <option value="">Seleccionar Día</option>
+                  <option *ngFor="let dia of diasPermitidos | keyvalue" [value]="dia.key">{{ dia.key }}</option>
+                </select>
+              </td>
+              <td>
+                <input type="time" [(ngModel)]="horario.horaInicio" class="form-control" [min]="diasPermitidos[horario.dia].inicio" [max]="diasPermitidos[horario.dia].fin">
+              </td>
+              <td>
+                <input type="time" [(ngModel)]="horario.horaFin" class="form-control" [min]="horario.horaInicio" [max]="diasPermitidos[horario.dia].fin">
+              </td>
+              <td>
+                <button type="button" class="btn-accion rojo" (click)="eliminarHorario(i)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      
+        <button style="margin-bottom: 20px;" type="button" class="btn-accion" (click)="agregarHorario()">Agregar Horario</button>
+        <button style="margin-bottom: 20px;" type="button" class="btn-accion verde" (click)="guardarHorarios()">Guardar Horarios</button>
+      </div>
+    }
+  }
+  
+  
+</div>
+
+<div *ngIf="!usuario">
+  <p>No se encontró información del usuario.</p>
+</div>
